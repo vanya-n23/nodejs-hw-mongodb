@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-
 import { getEnvVar } from '../utils/getEnvVar.js';
 
 export const initMongoConnection = async () => {
@@ -9,7 +8,7 @@ export const initMongoConnection = async () => {
     const url = getEnvVar('MONGODB_URL');
     const db = getEnvVar('MONGODB_DB');
 
-    await mongoose.connect(
+    mongoose.connect(
       `mongodb+srv://${user}:${pwd}@${url}/${db}?retryWrites=true&w=majority&appName=contacts`,
     );
     console.log('Mongo connection successfully established!');
