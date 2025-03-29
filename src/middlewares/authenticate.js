@@ -1,6 +1,6 @@
 import createHttpError from 'http-errors';
 import { SessionsCollection } from '../db/models/session.js';
-import { UsersCollections } from '../db/models/user.js';
+import { UsersCollection } from '../db/models/user.js';
 
 export const authenticate = async (req, res, next) => {
   const authHeader = req.get('Authorization');
@@ -27,13 +27,13 @@ export const authenticate = async (req, res, next) => {
   }
 
   if (session.accessTokenValidUntil < new Date()) {
-    next(createHttpError(401, 'хуйовий токен'));
+    next(createHttpError(401, 'поганий токен'));
   }
 
-  const user = await UsersCollections.findById(session.userId);
+  const user = await UsersCollection.findById(session.userId);
 
   if (!user) {
-    next(createHttpError(401, 'Іди нахуй'));
+    next(createHttpError(401, 'іди геть'));
     return;
   }
 
