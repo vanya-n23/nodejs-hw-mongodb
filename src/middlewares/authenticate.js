@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors';
-import { SessionsCollections } from '../db/models/session.js';
+import { SessionsCollection } from '../db/models/session.js';
 import { UsersCollections } from '../db/models/user.js';
 
 export const authenticate = async (req, res, next) => {
@@ -19,7 +19,7 @@ export const authenticate = async (req, res, next) => {
     return;
   }
 
-  const session = await SessionsCollections.findOne({ accessToken: token });
+  const session = await SessionsCollection.findOne({ accessToken: token });
 
   if (!session) {
     next(createHttpError(401, 'Сесію не знайдено'));
