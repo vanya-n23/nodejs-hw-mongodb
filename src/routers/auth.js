@@ -5,7 +5,7 @@ import {
   loginUserSchema,
   sendResetEmailSchema,
   resetPwdSchema,
-} from '../validation/auth.js';
+} from '../validation/user.js';
 import {
   registerUserController,
   loginUserController,
