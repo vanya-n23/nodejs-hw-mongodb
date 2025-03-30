@@ -1,9 +1,10 @@
 import createHttpError from 'http-errors';
-import { SessionsCollection } from '../db/models/session.js';
-import { UsersCollection } from '../db/models/user.js';
+import { SessionsCollections } from '../db/models/session.js';
+import { UsersCollections } from '../db/models/user.js';
 
 export const authenticate = async (req, res, next) => {
   const authHeader = req.get('Authorization');
+
   if (!authHeader) {
     next(createHttpError(401, 'Будь-ласка передайте заголовок'));
     return;
@@ -19,7 +20,7 @@ export const authenticate = async (req, res, next) => {
     return;
   }
 
-  const session = await SessionsCollection.findOne({ accessToken: token });
+  const session = await SessionsCollections.findOne({ accessToken: token });
 
   if (!session) {
     next(createHttpError(401, 'Сесію не знайдено'));
@@ -27,13 +28,13 @@ export const authenticate = async (req, res, next) => {
   }
 
   if (session.accessTokenValidUntil < new Date()) {
-    next(createHttpError(401, 'поганий токен'));
+    next(createHttpError(401, 'AccessToken is expired'));
   }
 
-  const user = await UsersCollection.findById(session.userId);
+  const user = await UsersCollections.findById(session.userId);
 
   if (!user) {
-    next(createHttpError(401, 'іди геть'));
+    next(createHttpError(401, 'User not found'));
     return;
   }
 

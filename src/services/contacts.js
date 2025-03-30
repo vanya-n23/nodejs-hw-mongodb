@@ -1,4 +1,4 @@
-import { SORT_ORDER } from '../constants/index.js';
+import SORT_ORDER from '../constants/index.js';
 import { ContactsCollections } from '../db/models/contacts.js';
 import { calculateData } from '../utils/calculatePages.js';
 
@@ -50,10 +50,10 @@ export const createContact = async (payload) => {
   return await ContactsCollections.create(payload);
 };
 
-export const deleteContact = async ({ contactId, userId }) => {
+export const deleteContact = async ({ _id, userId }) => {
   const contact = await ContactsCollections.findOneAndDelete({
-    _id: contactId,
-    userId: userId,
+    _id,
+    userId,
   });
   return contact;
 };
