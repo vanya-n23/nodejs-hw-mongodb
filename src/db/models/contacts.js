@@ -19,16 +19,19 @@ const contactsSchema = new Schema(
     },
     contactType: {
       type: String,
-      enum: ['work', 'home', 'personal'],
       required: true,
+      enum: ['work', 'home', 'personal'],
       default: 'personal',
     },
     userId: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: 'users',
       required: true,
     },
-    photo: { type: String },
+    photo: {
+      type: String,
+      default: null,
+    },
   },
   {
     timestamps: true,
