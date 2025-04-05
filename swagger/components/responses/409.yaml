@@ -1,0 +1,15 @@
+description: The request could not be completed due to a conflict with the current state of the target resource.
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: integer
+          example: 409
+        message:
+          type: string
+          example: User with this email already exists

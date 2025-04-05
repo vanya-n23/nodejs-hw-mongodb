@@ -1,0 +1,39 @@
+tags:
+  - Contacts
+summary: create new contact
+description: Creates a new contact in the database.
+  Required fields depend on the contact schema.
+  The contact can belong to categories like "work", "personal", or "home".
+  Can optionally include a photo.
+operationId: postContact
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        $ref: '../../components/schemas/contacts.yaml'
+responses:
+  '201':
+    description: Create a contact
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: 'Successfully created a contact!'
+            data:
+              $ref: '../../components/schemas/contacts.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

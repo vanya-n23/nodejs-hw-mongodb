@@ -1,0 +1,38 @@
+type: object
+required:
+  - name
+  - phoneNumber
+  - contactype
+  - userId
+properties:
+  name:
+    description: 'Please provide contact name'
+    type: string
+    example: 'Petro kreed'
+  phoneNumber:
+    description: 'Please provide phoneNumber'
+    type: string
+    example: '+380000000009'
+  contactType:
+    description: 'Select one of the types'
+    type: string
+    enum: ['work', 'home', 'personal']
+    default: personal
+    example: 'work'
+  userId:
+    description: "Contact's userId"
+    type: string
+    example: '65ca67e7ae7f10c88b598384'
+  email:
+    description: "Contact's email address"
+    type: string
+    example: 'oleh1@example.com'
+  isFavorite:
+    type: boolean
+    default: false
+    example: false
+  photo:
+    description: "Link to contact's photo"
+    type: string
+    default: null
+    example: 'https://res.cloudinary.com/dxrovat3s/image/upload/v1743504692/kv9oj0gluxspmqpulvgg.jpg'
