@@ -1,0 +1,37 @@
+tags:
+  - Contacts
+summary: delete contact by id
+description: Deletes a contact from the database using their unique ID.
+  This operation is irreversible.
+operationId: deleteContact
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '67bc2587611c05d1aa0feed0'
+responses:
+  '204':
+    description: no content
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+          properties:
+            status:
+              type: integer
+              example: 204
+            message:
+              type: string
+              example: Contact delete successfully!
+
+  '404':
+    $ref: '../../../components/responses/404.yaml'
+  '500':
+    $ref: '../../../components/responses/500.yaml'
