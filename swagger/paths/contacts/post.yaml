@@ -1,7 +1,8 @@
 tags:
   - Contacts
 summary: create new contact
-description: Creates a new contact in the database.
+description: >
+  Creates a new contact in the database.
   Required fields depend on the contact schema.
   The contact can belong to categories like "work", "personal", or "home".
   Can optionally include a photo.
@@ -12,7 +13,39 @@ requestBody:
   content:
     multipart/form-data:
       schema:
-        $ref: '../../components/schemas/contacts.yaml'
+        type: object
+        required:
+          - name
+          - phoneNumber
+          - contacType
+        properties:
+          name:
+            description: 'Please provide contact name'
+            type: string
+            example: 'Ivan Ivanenko'
+          phoneNumber:
+            description: 'Please provide phoneNumber'
+            type: string
+            example: '+380000000009'
+          contactType:
+            description: 'Select one of the types'
+            type: string
+            enum: ['work', 'home', 'personal']
+            default: personal
+            example: 'work'
+          email:
+            description: "Contact's email address"
+            type: string
+            example: 'oleh1@example.com'
+          isFavorite:
+            type: boolean
+            default: false
+            example: false
+          photo:
+            description: "Link to contact's photo"
+            type: string
+            format: binary
+
 responses:
   '201':
     description: Create a contact
